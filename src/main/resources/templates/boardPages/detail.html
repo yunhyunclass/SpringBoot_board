@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>detail.html</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>작성자</th>
+            <th>제목</th>
+            <th>비밀번호</th>
+            <th>작성일자</th>
+            <th>내용</th>
+            <th>조회수</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${board.id}"></td>
+            <td th:text="${board.boardWriter}"></td>
+            <td th:text="${board.boardTitle}"></td>
+            <td th:text="${board.boardPassword}"></td>
+            <td th:text="${board.createdTime}"></td>
+            <td th:text="${board.boardContents}"></td>
+            <td th:text="${board.boardHits}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <button onclick="updateReq()">수정</button>
+    <button onclick="deleteReq()">삭제</button>
+    <div id="pw">
+
+    </div>
+</body>
+<script th:inline="javascript">
+    const updateReq = () => {
+        console.log();
+        let inputTag = "글 비밀번호: <input type=\"text\" id=\"password\">";
+        inputTag += "<button onclick='pwCheck(1)'>확인</button>";
+        document.getElementById("pw").innerHTML = inputTag;
+        console.log("inputTag끝");
+    }
+    const deleteReq = () => {
+        console.log();
+        let inputTag = "글 비밀번호: <input type=\"text\" id=\"password\">";
+        inputTag += "<button onclick='pwCheck(2)'>확인</button>";
+        document.getElementById("pw").innerHTML = inputTag;
+        console.log("inputTag끝");
+    }
+    const pwCheck = (num) => {
+        console.log("pwCheck");
+        console.log(num);
+        const pw = [[${board.boardPassword}]];
+        const pwConfirm = document.getElementById("password").value;
+        if (pw == pwConfirm) {
+            if (num == 1) {
+                alert("수정화면으로");
+            } else {
+                alert("삭제화면으로");
+            }
+        } else {
+            alert("비밀번호가 틀립니다!!");
+        }
+    }
+</script>
+</html>
